@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA Detection - AI Medical Analysis System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <h1>RA Detection System</h1>
+                </div>
+                <p class="tagline">AI-Powered Rheumatoid Arthritis Severity Analysis</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- Introduction Section -->
+            <section class="intro-section">
+                <div class="intro-card">
+                    <h2><i class="fas fa-info-circle"></i> About This System</h2>
+                    <p>
+                        This AI-based system analyzes medical images to detect and classify the severity of 
+                        Rheumatoid Arthritis (RA) using advanced deep learning techniques. The system employs 
+                        explainable AI to provide transparent analysis and recommends appropriate healthcare 
+                        facilities based on severity level.
+                    </p>
+                    <div class="features">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <span>AI-Powered Analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Visual Explainability</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-hospital"></i>
+                            <span>Smart Recommendations</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-card">
+                    <h2><i class="fas fa-upload"></i> Upload Medical Image</h2>
+                    <p class="upload-description">Upload a medical image (X-ray, MRI, or clinical photo) of joints for RA analysis</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content" id="uploadContent">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Drag & Drop Image Here</h3>
+                            <p>or</p>
+                            <label for="fileInput" class="btn-upload">
+                                <i class="fas fa-folder-open"></i> Browse Files
+                            </label>
+                            <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png" hidden>
+                            <p class="file-info">Supported formats: JPG, JPEG, PNG (Max 16MB)</p>
+                        </div>
+                        
+                        <div class="preview-content" id="previewContent" style="display: none;">
+                            <img id="previewImage" src="" alt="Preview">
+                            <div class="preview-actions">
+                                <button class="btn btn-primary" id="analyzeBtn">
+                                    <i class="fas fa-microscope"></i> Analyze Image
+                                </button>
+                                <button class="btn btn-secondary" id="removeBtn">
+                                    <i class="fas fa-times"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Indicator -->
+            <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <h3>Analyzing Image...</h3>
+                    <p>AI is processing your medical image</p>
+                    <div class="loading-steps">
+                        <div class="step active">
+                            <i class="fas fa-check-circle"></i> Image preprocessing
+                        </div>
+                        <div class="step">
+                            <i class="fas fa-spinner fa-spin"></i> Feature extraction
+                        </div>
+                        <div class="step">
+                            <i class="far fa-circle"></i> Severity classification
+                        </div>
+                        <div class="step">
+                            <i class="far fa-circle"></i> Generating recommendations
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                
+                <!-- Severity Card -->
+                <div class="result-card severity-card">
+                    <h2><i class="fas fa-heartbeat"></i> Analysis Results</h2>
+                    <div class="severity-result">
+                        <div class="severity-badge" id="severityBadge">
+                            <span class="severity-level" id="severityLevel">-</span>
+                        </div>
+                        <div class="severity-details">
+                            <h3>Detected Severity: <span id="severityText">-</span></h3>
+                            <p class="confidence">Confidence: <span id="confidenceText">-</span>%</p>
+                            <div class="severity-meter">
+                                <div class="meter-fill" id="meterFill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RA Indicators Card -->
+                <div class="result-card indicators-card">
+                    <h2><i class="fas fa-stethoscope"></i> RA Indicators Analysis</h2>
+                    <div class="indicators-grid">
+                        <div class="indicator-item">
+                            <div class="indicator-icon swelling">
+                                <i class="fas fa-hand-holding-medical"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>Joint Swelling</h4>
+                                <div class="indicator-bar">
+                                    <div class="bar-fill" id="swellingBar"></div>
+                                </div>
+                                <span class="indicator-value" id="swellingValue">-</span>
+                            </div>
+                        </div>
+                        <div class="indicator-item">
+                            <div class="indicator-icon inflammation">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>Inflammation Marker</h4>
+                                <div class="indicator-bar">
+                                    <div class="bar-fill" id="inflammationBar"></div>
+                                </div>
+                                <span class="indicator-value" id="inflammationValue">-</span>
+                            </div>
+                        </div>
+                        <div class="indicator-item">
+                            <div class="indicator-icon deformity">
+                                <i class="fas fa-bone"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>Structural Changes</h4>
+                                <div class="indicator-bar">
+                                    <div class="bar-fill" id="deformityBar"></div>
+                                </div>
+                                <span class="indicator-value" id="deformityValue">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evaluation Graphs -->
+                <div class="result-card charts-card">
+                    <h2><i class="fas fa-chart-bar"></i> Evaluation Visualization</h2>
+                    <div class="charts-grid">
+                        <div class="chart-container">
+                            <h3>Severity Confidence Distribution</h3>
+                            <canvas id="confidenceChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>RA Indicator Levels</h3>
+                            <canvas id="indicatorsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explanation Card -->
+                <div class="result-card explanation-card">
+                    <h2><i class="fas fa-lightbulb"></i> AI Decision Explanation</h2>
+                    <div class="explanation-content" id="explanationContent">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Recommendation Card -->
+                <div class="result-card recommendation-card">
+                    <h2><i class="fas fa-hospital"></i> Recommended Healthcare Facility</h2>
+                    <div class="recommendation-content">
+                        <div class="clinic-header">
+                            <div class="clinic-icon">
+                                <i class="fas fa-hospital-alt"></i>
+                            </div>
+                            <div class="clinic-info">
+                                <h3 id="clinicName">-</h3>
+                                <p class="clinic-type" id="clinicType">-</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-info">
+                            <div class="doctor-item">
+                                <i class="fas fa-user-md"></i>
+                                <div>
+                                    <strong>Recommended Doctor</strong>
+                                    <p id="doctorName">-</p>
+                                </div>
+                            </div>
+                            <div class="doctor-item">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <strong>Specialization</strong>
+                                    <p id="specialization">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="treatment-plan">
+                            <h4><i class="fas fa-notes-medical"></i> Recommended Treatment Plan</h4>
+                            <p id="treatmentPlan">-</p>
+                        </div>
+
+                        <div class="appointment-info">
+                            <div class="info-row">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Appointment Urgency</strong>
+                                    <p id="urgency">-</p>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-rupee-sign"></i>
+                                <div>
+                                    <strong>Estimated Consultation Fee</strong>
+                                    <p id="consultationFee">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recommendation-actions">
+                            <button class="btn btn-primary" onclick="alert('Booking feature coming soon!')">
+                                <i class="fas fa-calendar-check"></i> Book Appointment
+                            </button>
+                            <button class="btn btn-secondary" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Analysis Button -->
+                <div class="new-analysis-section">
+                    <button class="btn btn-primary btn-large" id="newAnalysisBtn">
+                        <i class="fas fa-redo"></i> Analyze Another Image
+                    </button>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 RA Detection System | AI Problem-Solving Project</p>
+            <p class="disclaimer">
+                <i class="fas fa-exclamation-triangle"></i> 
+                Disclaimer: This is an educational AI system for demonstration purposes. 
+                Always consult qualified healthcare professionals for medical diagnosis.
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
