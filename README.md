@@ -223,40 +223,6 @@ Clinic: Advanced Arthritis Care Center
 Doctor: Dr. Michael Chen (Rheumatologist)
 Urgency: Priority appointment within 3-5 days
 ```
-
-## 🎓 Academic Alignment
-
-### Subject: AI Problem-Solving Techniques
-
-This project demonstrates:
-
-1. **Reasoning Over Learning**
-   - Uses pre-trained models (no training)
-   - Heuristic decision-making
-   - Rule-based classification
-
-2. **Explainable AI**
-   - Transparent feature analysis
-   - Visual confidence scores
-   - Decision logic explanation
-
-3. **Expert Systems**
-   - IF-THEN rules
-   - Knowledge-based recommendations
-   - Medical domain expertise
-
-4. **Human-Centered AI**
-   - Clear visualizations
-   - Actionable recommendations
-   - Professional medical interface
-
-### Suitable For:
-- ✅ College mini-project
-- ✅ AI problem-solving course
-- ✅ Viva demonstration
-- ✅ Technical presentation
-- ✅ Healthcare AI showcase
-
 ## 🔬 Technical Details
 
 ### Pre-trained Model: MobileNetV2
@@ -289,20 +255,6 @@ ELSE:
     THEN severity = High
     AND recommend Multispecialty Hospital
 ```
-
-## ⚠️ Important Notes
-
-### Ethical Considerations
-- ⚠️ **Educational Purpose Only**: This system is for demonstration and learning
-- ⚠️ **Not for Clinical Use**: Not validated for actual medical diagnosis
-- ⚠️ **Consult Professionals**: Always seek qualified medical advice
-- ⚠️ **No Liability**: Results should not replace professional medical evaluation
-
-### Limitations
-- Uses simulated AI logic for demonstration
-- Pre-trained model not specifically trained on RA images
-- Recommendations are rule-based examples
-- Not FDA/medical authority approved
 
 ## 🐛 Troubleshooting
 
@@ -353,16 +305,6 @@ Potential improvements for extended versions:
    - Camera integration
    - Offline analysis capability
 
-## 👥 Project Contributors
-
-**Developer**: AI Problem-Solving Engineer  
-**Purpose**: Educational Mini-Project  
-**Subject**: AI Problem-Solving Techniques  
-**Academic Year**: 2026
-
-## 📄 License
-
-This project is created for educational purposes. Feel free to use and modify for academic projects.
 
 ## 🙏 Acknowledgments
 
@@ -371,36 +313,3 @@ This project is created for educational purposes. Feel free to use and modify fo
 - Chart.js for visualization library
 - Medical AI research community
 
-## 📞 Support
-
-For issues or questions:
-1. Check troubleshooting section
-2. Review code comments
-3. Test with sample images
-
----
-
-## 🎯 Viva Preparation Points
-
-### Key Questions & Answers
-
-**Q: Why no dataset?**  
-A: This project focuses on AI problem-solving techniques using pre-trained models and heuristic reasoning, not on training. It demonstrates inference and decision-making.
-
-**Q: How is severity determined?**  
-A: Using a rule-based expert system with weighted feature analysis from CNN-extracted patterns.
-
-**Q: What AI techniques are used?**  
-A: Heuristic reasoning, rule-based expert systems, explainable AI, and transfer learning.
-
-**Q: Is this medically accurate?**  
-A: No, this is an educational demonstration. Real medical systems require clinical validation.
-
-**Q: Can it detect other diseases?**  
-A: This version is specifically designed for Rheumatoid Arthritis demonstration only.
-
----
-
-**Made with ❤️ for AI Problem-Solving Education**
-
-**⚕️ Remember**: This is an educational tool. Always consult healthcare professionals for medical decisions.
